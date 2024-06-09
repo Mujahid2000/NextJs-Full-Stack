@@ -1,8 +1,8 @@
 
-import Banner from '@/Component/Banner';
-import OrganicCotton from '@/Component/OrganicCotton';
-import ProductCard from '@/Component/Product';
-import Reviews from '@/Component/Reviews';
+import Banner from '@/app/Component/Banner';
+import OrganicCotton from '@/app/Component/OrganicCotton';
+import ProductCard from '@/app/Component/Product';
+import Reviews from '@/app/Component/Reviews';
 import React from 'react';
 
 
