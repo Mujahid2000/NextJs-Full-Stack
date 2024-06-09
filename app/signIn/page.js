@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { AuthContext } from '@/AuthProvider/AuthContext';
 import { useRouter } from 'next/navigation';
 
-const signIn = () => {
+const SignIn = () => {
   const { signIn, user,setLoading, googleLogin } = useContext(AuthContext);
   const router = useRouter();
 
@@ -120,4 +120,4 @@ useEffect(() => {
   );
 };
 
-export default signIn;
+export default SignIn;
