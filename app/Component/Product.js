@@ -10,7 +10,7 @@ const ProductCard = () => {
 const { user } = useContext(AuthContext);
 const email = user?.email
   useEffect(() => {
-    axios.get('http://localhost:3000/api/products')
+    axios.get('https://next-js-full-stack-nine.vercel.app/api/products')
       .then(res => setProductData(res.data))
       .catch(error => console.error(error));
   }, []);

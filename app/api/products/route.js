@@ -1,5 +1,5 @@
 import connectMongoDB from '@/libs/mongodb';
-import Product from '@/models/product'; // Assuming you have a Product model
+import Product from '@/models/product';
 import { NextResponse } from 'next/server';
 
 export async function GET() {
