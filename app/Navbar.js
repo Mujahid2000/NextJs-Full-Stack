@@ -28,18 +28,24 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    axios.get('https://project-orpin-iota.vercel.app/cartData')
+    axios.get('http://localhost:3000/api/cart')
       .then(res => setProduct(res.data))
       .catch(error => console.error(error));
   }, [product]);
 
   let totalPrice = 0;
 
+
+try {
   if (product) {
-    product.forEach(item => {
+    product?.cart?.forEach(item => {
       totalPrice += item?.data?.price
     });
   }
+  
+} catch (error) {
+  console.log('data not fount');
+}
 
   const handleDelete = (data) => {
     axios.delete('https://project-orpin-iota.vercel.app/cartData', { data })
@@ -91,7 +97,7 @@ const Navbar = () => {
                 <button className='w-8 h-8'>
                   <HiShoppingCart className="h-8 w-8 text-black" />
                 </button>
-                <span className="absolute -top-2 left-4 rounded-full bg-pink-500 p-0.5 px-2 text-sm text-red-50">{product?.length}</span>
+                <span className="absolute -top-2 left-4 rounded-full bg-pink-500 p-0.5 px-2 text-sm text-red-50">{product?.cart?.length}</span>
               </div>
               {menu && <div className="fixed inset-0" onClick={() => setMenu(false)}></div>}
             </div>
@@ -158,7 +164,7 @@ const Navbar = () => {
       {checkout && (
         <div className='fixed top-[5rem] w-80 right-0 max-h-screen z-40  animate-fade-left'>
           <div className="px-4 py-4 w-full h-screen max-w-lg bg-white rounded-xl shadow-md space-y-4 ">
-            {product.map(myData => (
+            {product?.cart?.map(myData => (
               <div className="flex items-center gap-3" key={myData._id}>
                 <img className="h-12 w-12 rounded-lg" src={myData?.data?.imageUrl} alt={myData?.data?.name} />
                 <div>

@@ -42,7 +42,7 @@ const CheckoutPage = () => {
     
 
     useEffect(() =>{
-      axios.get(`https://project-orpin-iota.vercel.app/cartData`)
+      axios.get(`http://localhost:3000/api/cart`)
       .then(res => setProduct(res.data))
       .catch(error => console.error(error))
   },[product])
@@ -50,8 +50,8 @@ const CheckoutPage = () => {
   let totalPrice = 0;
 
 if(product){
-  product.forEach(item =>{
-    totalPrice += item.data.price
+  product?.cart?.forEach(item =>{
+    totalPrice += item?.data.price
   })
 }
   
@@ -270,12 +270,14 @@ if(product){
           Order Summary
         </h1>
           {
-            product.map(myData =>(
+            product?.cart?.map(myData =>(
               <ul className="py-6 border-b space-y-6 px-8" key={myData._id}>
               <li className="grid grid-cols-6 gap-2 border-b-1" >
             <div className="col-span-1 self-center">
               <Image
-                src={myData.data.imageUrl}
+              width={90}
+              height={90}  
+              src={myData.data.imageUrl}
                 alt="Product"
                 className="rounded "
               />
