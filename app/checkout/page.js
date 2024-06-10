@@ -3,12 +3,13 @@ import axios from "axios";
 import { useContext, useEffect, useRef, useState } from "react";
 import { Toaster, toast } from "sonner";
 import Image from "next/image";
+import { AuthContext } from "@/AuthProvider/AuthContext";
 
 const CheckoutPage = () => {
   const [product, setProduct] = useState([]);
-//   const { user } = useContext(AuthContext);
-//   const email = user?.email;
-//   const userEmail = user?.email;
+  const { user } = useContext(AuthContext);
+  // const email = user?.email;
+  const userEmail = user?.email;
   const formRef = useRef();
   const dualCurrencyRef = useRef();
   const paypalref = useRef();
@@ -34,7 +35,7 @@ const CheckoutPage = () => {
         const deliverInfo = {first_name, last_name, phone,email,address,date,time, area,city, state,post_code , dualCurrencyValue, paypal};
 
 
-        axios.post('https://project-orpin-iota.vercel.app/deliveryinfo', {deliverInfo, product})
+        axios.post('https://project-orpin-iota.vercel.app/deliveryinfo', {deliverInfo, product, userEmail})
         .then((response) => console.log(response));
         toast.success("Order Success")
     }
@@ -42,7 +43,7 @@ const CheckoutPage = () => {
     
 
     useEffect(() =>{
-      axios.get(`https://next-js-full-stack-nine.vercel.app/api/cart`)
+      axios.get(`http://localhost:3000/api/cart`)
       .then(res => setProduct(res.data))
       .catch(error => console.error(error))
   },[product])

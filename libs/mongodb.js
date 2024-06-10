@@ -1,19 +1,23 @@
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 
-dotenv.config(); 
+dotenv.config(); // Ensure environment variables are loaded
+const uri = process.env.MONGODB_URI;
+const options = {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  serverSelectionTimeoutMS: 5000, // Adjust timeout as needed
+};
 
 const connectMongoDB = async () => {
   try {
-    if (mongoose.connection.readyState === 0) { 
-      await mongoose.connect(process.env.MONGODB_URI, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-      });
+    if (mongoose.connection.readyState === 0) { // To avoid re-connecting if already connected
+      await mongoose.connect(uri, options);
       console.log('Connected to MongoDB');
     }
   } catch (error) {
-    console.log('Error connecting to MongoDB:', error);
+    console.error('Error connecting to MongoDB:', error);
+    throw error;
   }
 };
 
