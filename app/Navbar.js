@@ -28,7 +28,7 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    axios.get('https://next-js-full-stack-nine.vercel.app/api/cart')
+    axios.get('https://next-js-full-stack-nu.vercel.app/api/cart')
       .then(res => setProduct(res.data))
       .catch(error => console.error(error));
   }, [product]);
