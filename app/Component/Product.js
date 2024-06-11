@@ -2,7 +2,6 @@
 import { AuthContext } from "@/AuthProvider/AuthContext";
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
-import {   FaCartPlus  } from "react-icons/fa";
 import { Toaster, toast } from "sonner";
 
 const ProductCard = () => {

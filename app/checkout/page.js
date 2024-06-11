@@ -8,39 +8,48 @@ import { AuthContext } from "@/AuthProvider/AuthContext";
 const CheckoutPage = () => {
   const [product, setProduct] = useState([]);
   const { user } = useContext(AuthContext);
+  const products = (product);
+
   // const email = user?.email;
   const userEmail = user?.email;
   const formRef = useRef();
   const dualCurrencyRef = useRef();
   const paypalref = useRef();
 
+  
 
-// console.log(product);
-    const handleCheckout = (e) =>{
-        e.preventDefault();
-        const form = new FormData(e.currentTarget);
-        const first_name = form.get('first-name');
-        const last_name = form.get('last-name');
-        const phone = form.get('phone');
-        const email = form.get('email');
-        const address = form.get('address');
-        const date = form.get('date');
-        const time = form.get('time');
-        const area = form.get('area');
-        const city = form.get('city');
-        const state = form.get('state');
-        const post_code = form.get('post-code');
-        const dualCurrencyValue = dualCurrencyRef.current.checked ? dualCurrencyRef.current.value : null;
-        const paypal = paypalref.current.checked ? paypalref.current.value : null;
-        const deliverInfo = {first_name, last_name, phone,email,address,date,time, area,city, state,post_code , dualCurrencyValue, paypal};
+const handleCheckout = async (e) => {
+  e.preventDefault();
+  const form = new FormData(e.currentTarget);
+  const first_name = form.get('first-name');
+  const last_name = form.get('last-name');
+  const phone = form.get('phone');
+  const email = form.get('email');
+  const address = form.get('address');
+  const date = form.get('date');
+  const time = form.get('time');
+  const area = form.get('area');
+  const city = form.get('city');
+  const state = form.get('state');
+  const post_code = form.get('post-code');
+  const dualCurrencyValue = dualCurrencyRef.current.checked ? dualCurrencyRef.current.value : null;
+  const paypal = paypalref.current.checked ? paypalref.current.value : null;
+  const deliveryInfo = { first_name, last_name, phone, email, address, date, time, area, city, state, post_code, dualCurrencyValue, paypal };
 
-
-        axios.post('https://project-orpin-iota.vercel.app/deliveryinfo', {deliverInfo, product, userEmail})
-        .then((response) => console.log(response));
-        toast.success("Order Success")
-    }
-
+  try {
     
+    axios.post('https://next-js-full-stack-nu.vercel.app/api/deliverydata', { deliveryInfo, products, userEmail })
+      .then((response) => {
+        console.log(response);
+        toast.success("Order Success");
+      });
+  } catch (error) {
+    console.error(error);
+    toast.error("Error fetching cart data");
+  }
+}
+
+
 
     useEffect(() =>{
       axios.get(`https://next-js-full-stack-nu.vercel.app/api/cart`)

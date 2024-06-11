@@ -29,7 +29,7 @@ const Navbar = () => {
 
   useEffect(() => {
     axios.get('https://next-js-full-stack-nu.vercel.app/api/cart')
-      .then(res => setProduct(res.data))
+      .then(res => setProduct(res?.data))
       .catch(error => console.error(error));
   }, [product]);
 
@@ -47,20 +47,24 @@ try {
   console.log('data not fount');
 }
 
-  const handleDelete = (data) => {
-    axios.delete('https://project-orpin-iota.vercel.app/cartData', { data })
-      .then(() => {
-        setProduct(prevProducts => prevProducts.filter(item => item._id !== data._id));
-      })
-      .catch(console.error);
+  const handleDelete =async (data) => {
+    try {
+      axios.delete('https://next-js-full-stack-nu.vercel.app/api/cartdelete',  data )
+      setProduct(prevProducts => prevProducts?.cart?.filter(item => item?._id !== data?._id));
+    } catch (error) {
+      console.log(error);
+    }
+    
   }
 
-  const handleSingleProductDelete = (data) => {
-    axios.delete('https://project-orpin-iota.vercel.app/singledata', { data })
-      .then(() => {
-        setProduct(prevProducts => prevProducts.filter(item => item._id !== data._id));
-      })
-      .catch(console.error);
+  const handleSingleProductDelete =async (data) => {
+    
+    try {
+    await  axios.delete(`https://next-js-full-stack-nu.vercel.app/api/signledelete/${data?._id}`)
+      setProduct((previousProduct)=> previousProduct?.cart.filter(item => item?._id !== data?._id))
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   const handleLogOut = () => {
@@ -188,7 +192,7 @@ try {
                   Checkout
                 </button>
               </Link>
-              <button onClick={() => handleDelete(product)} className="w-full p-2 bg-pink-500 active:bg-pink-700 text-sm md:text-lg text-white rounded-md">
+              <button onClick={() => handleDelete(product?.cart)} className="w-full p-2 bg-pink-500 active:bg-pink-700 text-sm md:text-lg text-white rounded-md">
                 Clear Cart
               </button>
             </div>

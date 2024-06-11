@@ -6,13 +6,13 @@ export async function POST(request) {
   try {
     const { data, email } = await request.json();
     await connectMongoDB();
-    console.log('Request Data:', { data, email });
+   
 
     const newCart = new Cart({ data, email });
-    console.log('New Cart Object:', newCart);
+    
 
     const savedCart = await newCart.save();
-    console.log('Saved Cart:', savedCart);
+    
 
     return NextResponse.json({ message: 'Cart Added', cart: savedCart }, { status: 201 });
   } catch (error) {

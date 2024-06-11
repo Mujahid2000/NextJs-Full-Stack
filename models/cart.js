@@ -10,7 +10,7 @@ const dataSchema = new Schema({
 
 const cartSchema = new Schema(
   {
-    data: dataSchema, // Use the data schema here
+    data: dataSchema,
     email: { type: String, required: true }
   },
   {
