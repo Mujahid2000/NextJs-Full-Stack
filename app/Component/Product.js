@@ -19,7 +19,7 @@ const email = user?.email
     if(email){
 
       {
-        axios.post('http://localhost:3000/api/cart', {data, email})
+        axios.post('https://next-js-full-stack-nine.vercel.app/api/cart', {data, email})
         .then((response) => console.log(response));
         toast.success("Item added to cart!")
   
@@ -42,7 +42,7 @@ const email = user?.email
             
           </div>
           <div className="px-6 py-4">
-            <h3 className="font-semibold text-xl inline-block hover:text-pink-600 transition duration-500 ease-in-out">{product.name.slice(0, 19)}</h3>
+            <h3 className="font-semibold cursor-pointer text-xl inline-block hover:text-pink-600 transition duration-500 ease-in-out">{product.name.slice(0, 19)}</h3>
             <p className="text-gray-500 text-sm">{product.description.slice(0, 35)}            </p>
             
            
