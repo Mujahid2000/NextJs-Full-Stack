@@ -60,7 +60,7 @@ try {
   const handleSingleProductDelete =async (data) => {
     
     try {
-    await  axios.delete(`https://next-js-full-stack-nu.vercel.app/api/signledelete/${data?._id}`)
+      axios.delete(`https://next-js-full-stack-nu.vercel.app/api/signledelete/${data?._id}`)
       setProduct((previousProduct)=> previousProduct?.cart.filter(item => item?._id !== data?._id))
     } catch (error) {
       console.log(error);

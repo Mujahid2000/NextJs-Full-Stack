@@ -45,7 +45,7 @@ const cartSchema = new Schema({
 // Schema for delivery data
 const deliveryDataSchema = new Schema({
     deliveryInfo: { type: deliveryInfoSchema, },
-    products: { type: [productSchema], }, // Array of productSchema
+    products:   [cartSchema], // Array of productSchema
     userEmail: { type: String }
 }, { 
     versionKey: false // Disable the __v field

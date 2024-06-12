@@ -8,7 +8,7 @@ import { AuthContext } from "@/AuthProvider/AuthContext";
 const CheckoutPage = () => {
   const [product, setProduct] = useState([]);
   const { user } = useContext(AuthContext);
-  const products = (product);
+  const products = product;
 
   // const email = user?.email;
   const userEmail = user?.email;
